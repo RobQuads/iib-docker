@@ -20,6 +20,9 @@ RUN mkdir /opt/ibm && \
     | tar zx --exclude iib-10.0.0.6/tools --directory /opt/ibm && \
     /opt/ibm/iib-10.0.0.6/iib make registry global accept license silently
 
+#Temp fix for security as base image missing fixes
+RUN apt-get update && apt-get dist-upgrade
+
 # Configure system
 COPY kernel_settings.sh /tmp/
 RUN echo "IIB_10:" > /etc/debian_chroot  && \
